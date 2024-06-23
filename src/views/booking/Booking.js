@@ -22,20 +22,60 @@ import Contact from "views/landing-page/Contact";
 import withRouter from "components/WithRouterWrapper";
 import insertBooking from "data/database/FirestoreDataSource";
 import TableBook from "components/TableBook";
+import sendNotifWABooking from "data/remote/AxiosDatasource";
 
 const bookingSample = {
   bride: "test",
   groom: "test",
   service: "wedding",
-  package: "single",
+  package: "Single",
   eventDate: '2024-12-12',
   startTime: '12:00',
   endTime: '16:00',
+  email:'email@gmail.com',
+  phoneWA:'08139943832',
   eventAddress: 'Karanganyar',
   brideInstagram: 'testbride',
   groomInstagram: 'testgroom',
+  vendorInstagram: 'testgroom',
+  price: 'Rp.1000.000',
+  minimalDp: 'Rp.200.000'
 }
 
+function randomID(){
+  return Math.random().toString(36).split('').filter(function (value, index, self) {
+    return self.indexOf(value) === index;
+  }).join('').substring(2, 9).toUpperCase();
+}
+
+export async function submitBooking(bookingData) {
+
+  bookingData['bookingId']= randomID()
+  insertBooking(bookingData)
+
+  const messageNotif = {
+    whatsappTo: '6281329729429',
+    whatsappTemplate: 'booking_detail',
+    bookingId: bookingData.bookingId,
+    service: bookingData.service,
+    package: bookingData.package,
+    eventDate:bookingData.eventDate,
+    startTime: bookingData.startTime,
+    endTime: bookingData.endTime,
+    bride: bookingData.bride,
+    groom: bookingData.groom,
+    eventAddress: bookingData.eventAddress,
+    email: bookingData.email,
+    phoneWA: bookingData.phoneWA,
+    brideInstagram: bookingData.brideInstagram,
+    groomInstagram: bookingData.groomInstagram,
+    vendorInstagram: bookingData.vendorInstagram,
+    price: bookingData.price,
+    minimalDp: bookingData.minimalDp
+  }
+  console.log('send notif...')
+  await sendNotifWABooking(messageNotif)
+}
 class Booking extends React.Component {
 
 
@@ -46,8 +86,9 @@ class Booking extends React.Component {
 
     console.log(this.props)
 
-   
+
   }
+
   render() {
     // const { packageItem } = this.state;
     const packageItem = this.props.router.location.state.package;
@@ -63,7 +104,7 @@ class Booking extends React.Component {
                 <Col lg="8">
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="bg-white px-lg-5 py-lg-5">
-                    <TableBook
+                      <TableBook
                         // image={this.state.image}
                         serviceName={packageItem[0]}
                         packageItem={packageItem[1].title}
@@ -224,8 +265,8 @@ class Booking extends React.Component {
                             className="my-4"
                             color="primary"
                             type="button"
-                            onClick={() => insertBooking(bookingSample)}
-                     
+                            onClick={async () => await submitBooking(bookingSample)}
+
                           >
                             Book Now
                           </Button>
