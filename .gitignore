@@ -45,7 +45,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-
+# Whatsapp-web.js session folder
+whatsapp-session/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -139,3 +140,7 @@ serviceAccount.json
 /.idea
 /.vscode
 /.idx
+/.wwebjs_auth/
+/.wwebjs_cache/
+
+WHATSAPP_SETUP.md

@@ -32,7 +32,8 @@
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "sass src/assets/scss/argon-design-system-react.scss src/assets/css/argon-design-system-react.css",
-    "minify-sass": "sass src/assets/scss/argon-design-system-react.scss src/assets/css/argon-design-system-react.min.css --style compressed"
+    "minify-sass": "sass src/assets/scss/argon-design-system-react.scss src/assets/css/argon-design-system-react.min.css --style compressed",
+    "start-server": "node whatsapp-server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,12 +48,15 @@
     "axios": "^1.7.2",
     "bootstrap": "4.6.2",
     "classnames": "2.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "firebase": "^10.11.1",
     "firebase-admin": "^12.1.0",
     "fslightbox-react": "^1.7.6",
     "headroom.js": "0.12.0",
     "moment": "2.29.4",
     "nouislider": "15.4.0",
+    "qrcode-terminal": "^0.12.0",
     "react": ">=16.0.0",
     "react-datetime": "3.2.0",
     "react-device-detect": "^2.2.3",
@@ -63,7 +67,9 @@
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^1.5.2",
     "reactstrap": "8.10.0",
-    "sass": "1.62.1"
+    "sass": "1.62.1",
+    "dotenv": "^16.3.1",
+    "whatsapp-web.js": "^1.20.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

@@ -147,7 +147,7 @@ class About extends React.Component {
             </Col>
           </Row>
           {/* <Container className> */}
-            <Testimonials></Testimonials>
+            <Testimonials></Testimonials> 
           {/* </Container> */}
 
 
